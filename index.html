@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <title>MostValuable WishList</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-wZtH3GYpZLhAtbB1juvS9r44W/Ng6sRA/Kh8+BEPL1K0SKd94VdC9TEIbbVFaMBx" crossorigin="anonymous"></script>
-  <style>
-    #background-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      filter: brightness(65%);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5;url=" id="redirectMeta">
+    <script type="text/javascript">
+        // Get parameters from the URL (e.g., campaign_id, source, etc.)
+        var urlParams = new URLSearchParams(window.location.search);
+        var subid = urlParams.get('subid');
+        var campaign_id = urlParams.get('campaign_id');
+        var source = urlParams.get('source');
+        
+        // Default redirect if parameters are missing
+        var redirectUrl = "https://www.your-fallback-url.com"; // Default URL for no parameters
+
+        // Mask the final affiliate destination URL by using a "masking" URL
+        if (subid && campaign_id && source) {
+            // Construct the dynamic masking URL for further redirection
+            redirectUrl = "https://www.your-pre-lander.com/mask?subid=" + subid + "&campaign_id=" + campaign_id + "&source=" + source;
+        }
+
+        // Update the meta refresh tag to handle redirect
+        document.getElementById("redirectMeta").setAttribute('content', '5;url=' + redirectUrl);
+
+        // Handle the redirect after 5 seconds
+        setTimeout(function() {
+            window.location.href = redirectUrl;
+        }, 5000); // Redirect after 5 seconds
+
+        // Update the manual redirect link
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("manual-redirect").setAttribute('href', redirectUrl);
+        });
+    </script>
+    <title>Redirecting...</title>
 </head>
-
 <body>
-  <video id="background-video" autoplay muted loop playsinline>
-    <source src="https://hmblps.github.io/HTML-CSS-JS-FUNDAMENTALS-IVANO-FRANKIVSK-/indexasdasda.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-
-  <object data="https://levmvp.github.io/wishlist/tohtml.xlsx" type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" width="65%" height="450">
-    <p>It appears your web browser doesn't support embedding Excel files. You can download the file <a href="tohtml.xlsx">here</a>.</p>
-  </object>
-
+    <p>If you are not redirected automatically, please click <a href="#" id="manual-redirect">here</a>.</p>
+</body>
 </html>
